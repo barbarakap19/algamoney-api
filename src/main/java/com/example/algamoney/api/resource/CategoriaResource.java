@@ -23,6 +23,7 @@ public class CategoriaResource {
 private List<Categoria> listar() {
 	return categoriaRepository.findAll();
 	
+	
 }
 	@GetMapping("/outro")
 	public String outro() {
