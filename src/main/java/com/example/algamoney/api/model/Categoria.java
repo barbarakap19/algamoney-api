@@ -13,6 +13,7 @@ public class Categoria {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long codigo;
+	
 	private String nome;
 	@Override
 	public int hashCode() {
