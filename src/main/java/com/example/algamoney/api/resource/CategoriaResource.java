@@ -1,3 +1,5 @@
+
+
 package com.example.algamoney.api.resource;
 
 import java.util.List;
@@ -24,9 +26,10 @@ import com.example.algamoney.api.repository.CategoriaRepository;
 
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/categorias") // caminho para acessar esse controlador
 public class CategoriaResource {
 	
+	// É adicionado um atributo do tipo CategoriaRepository, que é o repositório criado
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
@@ -34,11 +37,15 @@ public class CategoriaResource {
 	private ApplicationEventPublisher publisher;
 
 	@GetMapping
-private List<Categoria> listar() {
+    private List<Categoria> listar() {
 	return categoriaRepository.findAll();
 	
 	
 }
+	// método para adicionar uma categoria, que será acessado quando a requisição for do tipo POST
+	// recebe também como parâmetro o nome de uma categoria.
+	//a categoria será enviada pela requisição, será cadastrado no banco de dados utilizando a interface repositório. 
+	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
@@ -49,6 +56,12 @@ private List<Categoria> listar() {
 		
 	
 	}
+	
+	// listar as categorias de um determinado codigo e que será acessado quando a requisição para esse controlador 
+	//for do tipo GET
+	//  receberá como parâmetro o codigo, por onde é feita uma busca no banco de dados para encontrar todos as 
+	//categorias. Caso sejam encontrada, essa lista é adicionada no model para que seja mostrada depois 
+	//na tela da aplicação
 	
 	@GetMapping("/{codigo}")
 	public Categoria buscarPeloCodigo(@PathVariable Long codigo) {

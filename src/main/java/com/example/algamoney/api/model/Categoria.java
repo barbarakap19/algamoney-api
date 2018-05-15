@@ -1,3 +1,6 @@
+// implementação da classe que representa os objetos que serão persistidos no banco de dados
+
+
 package com.example.algamoney.api.model;
 
 import javax.persistence.Entity;
@@ -8,12 +11,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity
+//anotações jpa
+@Entity //indicar que a classe é uma entidade do banco de dados
 @Table(name="categoria")
 public class Categoria {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id// indicar que o campo id é o identificador da entidade
+	@GeneratedValue(strategy=GenerationType.IDENTITY) // indica que o valor será gerado banco de dados
 	private Long codigo;
 	
 	@NotNull
