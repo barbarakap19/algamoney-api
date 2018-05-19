@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 //informa que a classe é uma entidade
 @Entity
@@ -27,8 +28,10 @@ public class Lancamento {
 	//IDENTITY, onde a base de dados é responsável por determinar a próxima chave-primária;
 	private Long codigo;
 	
+	@NotNull
 	private String descricao;
 
+	@NotNull
 	//dar nomes a colunas
 	@Column(name = "data_vencimento")
 	private LocalDate dataVencimento;
@@ -36,6 +39,7 @@ public class Lancamento {
 	@Column(name = "data_pagamento")
 	private LocalDate dataPagamento;
 
+	@NotNull
 	private BigDecimal valor;
 
 	private String observacao;
@@ -43,13 +47,16 @@ public class Lancamento {
 	//são usados para a criação de estruturas de dados organizados, 
 	//podendo agrupar valores que tenham o mesmo sentido para dentro dessa estrutura
 	//armazenar valores enumerados no Banco de Dados
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TipoLancamento tipo;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "codigo_categoria")
 	private Categoria categoria;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "codigo_pessoa") //qual a coluna que faz esse relacionamento
 	private Pessoa pessoa;
