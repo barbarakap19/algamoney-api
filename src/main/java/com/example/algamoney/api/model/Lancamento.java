@@ -16,15 +16,20 @@ import javax.persistence.Table;
 
 //informa que a classe é uma entidade
 @Entity
+//definir o nome de uma tabela
 @Table(name = "lancamento")
 public class Lancamento {
 	
+	//Informa o atributo na classe que será utilizado como chave primária.
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//Essa 	anotação é utilizada quando desejamos que o provedor de persistência gere as chaves para nós.
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //estratégia de geração de 	valores incrementados
+	//IDENTITY, onde a base de dados é responsável por determinar a próxima chave-primária;
 	private Long codigo;
 	
 	private String descricao;
 
+	//dar nomes a colunas
 	@Column(name = "data_vencimento")
 	private LocalDate dataVencimento;
 
@@ -35,6 +40,9 @@ public class Lancamento {
 
 	private String observacao;
 
+	//são usados para a criação de estruturas de dados organizados, 
+	//podendo agrupar valores que tenham o mesmo sentido para dentro dessa estrutura
+	//armazenar valores enumerados no Banco de Dados
 	@Enumerated(EnumType.STRING)
 	private TipoLancamento tipo;
 
@@ -43,7 +51,7 @@ public class Lancamento {
 	private Categoria categoria;
 
 	@ManyToOne
-	@JoinColumn(name = "codigo_pessoa")
+	@JoinColumn(name = "codigo_pessoa") //qual a coluna que faz esse relacionamento
 	private Pessoa pessoa;
 
 	public Long getCodigo() {
