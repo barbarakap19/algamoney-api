@@ -32,9 +32,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 			.secret("@ngul@r0")
 			//limitar o acesso do cliente
 			.scopes("read", "write")
-			.authorizedGrantTypes("password")
+			.authorizedGrantTypes("password", "refresh_token")
 			//quanto tempo o tpken vai ficar ativo
-			.accessTokenValiditySeconds(1800);
+			.accessTokenValiditySeconds(20)
+			.refreshTokenValiditySeconds(3600 * 24);
 	}
 	
 	@Override
@@ -43,6 +44,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		//o angular vem buscar o token
 			.tokenStore(tokenStore())
 			.accessTokenConverter(accessTokenConverter())
+			.reuseRefreshTokens(false)
 			.authenticationManager(authenticationManager);
 	}
 	
