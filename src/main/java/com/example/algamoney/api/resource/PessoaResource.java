@@ -47,17 +47,14 @@ public class PessoaResource {
 	@PostMapping
 	public ResponseEntity<Pessoa> criar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
 		Pessoa pessoaSalva = pessoaRepository.save(pessoa);
-		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, pessoaSalva.getCodigo()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
-		
-		
 	}
 	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Pessoa> buscarPeloCodigo(@PathVariable Long codigo) {
 		Pessoa pessoa = pessoaRepository.findOne(codigo);
-		 return pessoa != null ? ResponseEntity.ok(pessoa) : ResponseEntity.notFound().build();
+		return pessoa != null ? ResponseEntity.ok(pessoa) : ResponseEntity.notFound().build();
 	}
 	
 	@DeleteMapping("/{codigo}")
@@ -72,7 +69,6 @@ public class PessoaResource {
 		Pessoa pessoaSalva = pessoaService.atualizar(codigo, pessoa);
 		return ResponseEntity.ok(pessoaSalva);
 	}
-	
 	
 	@PutMapping("/{codigo}/ativo")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
